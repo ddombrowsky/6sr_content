@@ -16,6 +16,20 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `t$content`
+--
+
+DROP TABLE IF EXISTS `t$content`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t$content` (
+  `content_id` int(11) NOT NULL AUTO_INCREMENT,
+  `uri` varchar(512) NOT NULL,
+  PRIMARY KEY (`content_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `t$segments`
 --
 
@@ -28,8 +42,10 @@ CREATE TABLE `t$segments` (
   `content_id` int(11) DEFAULT NULL,
   `start_time` time DEFAULT NULL,
   `end_time` time DEFAULT NULL,
-  PRIMARY KEY (`segment_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`segment_id`),
+  KEY `fk_content_id_idx` (`content_id`),
+  CONSTRAINT `fk_content_id` FOREIGN KEY (`content_id`) REFERENCES `t$content` (`content_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=98 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -41,4 +57,4 @@ CREATE TABLE `t$segments` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-05-30 15:44:17
+-- Dump completed on 2016-05-30 16:42:50
