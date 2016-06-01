@@ -1,6 +1,8 @@
+-- mysqldump --no-defaults --host=192.168.1.7 -p --no-data -R sixsr
+--
 -- MySQL dump 10.13  Distrib 5.5.49, for debian-linux-gnu (i686)
 --
--- Host: localhost    Database: sixsr
+-- Host: 192.168.1.7    Database: sixsr
 -- ------------------------------------------------------
 -- Server version	5.5.49-0ubuntu0.14.04.1
 
@@ -42,11 +44,34 @@ CREATE TABLE `t$segments` (
   `content_id` int(11) DEFAULT NULL,
   `start_time` time DEFAULT NULL,
   `end_time` time DEFAULT NULL,
+  `preempt` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`segment_id`),
   KEY `fk_content_id_idx` (`content_id`),
   CONSTRAINT `fk_content_id` FOREIGN KEY (`content_id`) REFERENCES `t$content` (`content_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=98 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping routines for database 'sixsr'
+--
+/*!50003 DROP PROCEDURE IF EXISTS `get_content_at` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = latin1 */ ;
+/*!50003 SET character_set_results = latin1 */ ;
+/*!50003 SET collation_connection  = latin1_swedish_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = '' */ ;
+DELIMITER ;;
+CREATE DEFINER=`davek`@`%` PROCEDURE `get_content_at`(in a_time time)
+BEGIN select c.content_id, s.preempt, start_time, end_time, priority, uri from t$segments s left join t$content c on (s.content_id = c.content_id) where start_time<=a_time and end_time>=a_time order by priority;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -57,4 +82,4 @@ CREATE TABLE `t$segments` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-05-30 16:42:50
+-- Dump completed on 2016-06-01  2:39:46
