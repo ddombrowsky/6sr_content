@@ -6,3 +6,9 @@ From tutorial at https://docs.djangoproject.com/en/1.7/intro/tutorial02/
   cd sixsr
   python manage.py startapp sixsr_web
   python manage.py syncdb  #  generate DB scripts
+
+  # create initial admin
+  python manage.py createsuperuser
+
+  # start dev site
+  python manage.py runserver 0.0.0.0:8000
