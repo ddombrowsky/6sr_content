@@ -32,13 +32,13 @@ CREATE TABLE `t$content` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `t$segments`
+-- Table structure for table `t$segment`
 --
 
-DROP TABLE IF EXISTS `t$segments`;
+DROP TABLE IF EXISTS `t$segment`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `t$segments` (
+CREATE TABLE `t$segment` (
   `segment_id` int(11) NOT NULL AUTO_INCREMENT,
   `priority` int(11) DEFAULT '0',
   `content_id` int(11) DEFAULT NULL,
@@ -65,7 +65,7 @@ CREATE TABLE `t$segments` (
 /*!50003 SET sql_mode              = '' */ ;
 DELIMITER ;;
 CREATE DEFINER=`davek`@`%` PROCEDURE `get_content_at`(in a_time time)
-BEGIN select c.content_id, s.preempt, start_time, end_time, priority, uri from t$segments s left join t$content c on (s.content_id = c.content_id) where start_time<=a_time and end_time>=a_time order by priority desc;
+BEGIN select c.content_id, s.preempt, start_time, end_time, priority, uri from t$segment s left join t$content c on (s.content_id = c.content_id) where start_time<=a_time and end_time>=a_time order by priority desc;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;

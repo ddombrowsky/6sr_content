@@ -14,7 +14,7 @@ class Content(models.Model):
 	def __str__(self):
 		return self.uri;
 
-class Segments(models.Model):
+class Segment(models.Model):
 	segment_id = models.IntegerField(primary_key=True)
 	priority = models.IntegerField(blank=True, null=True)
 	content = models.ForeignKey(Content, blank=True, null=True)
@@ -23,7 +23,7 @@ class Segments(models.Model):
 	preempt = models.IntegerField()
 	class Meta:
 		managed = True
-		db_table = 't$segments'
+		db_table = 't$segment'
 
 	def __str__(self):
 		return (str(self.start_time) + ' -> ' + str(self.end_time) +

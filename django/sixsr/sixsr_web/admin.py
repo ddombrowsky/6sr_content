@@ -2,7 +2,7 @@ from django.contrib import admin
 
 # Register your models here.
 
-from .models import Segments, Content;
+from .models import Segment, Content;
 
-admin.site.register(Segments);
+admin.site.register(Segment);
 admin.site.register(Content);
