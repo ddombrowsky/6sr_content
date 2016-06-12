@@ -65,7 +65,7 @@ CREATE TABLE `t$segments` (
 /*!50003 SET sql_mode              = '' */ ;
 DELIMITER ;;
 CREATE DEFINER=`davek`@`%` PROCEDURE `get_content_at`(in a_time time)
-BEGIN select c.content_id, s.preempt, start_time, end_time, priority, uri from t$segments s left join t$content c on (s.content_id = c.content_id) where start_time<=a_time and end_time>=a_time order by priority;
+BEGIN select c.content_id, s.preempt, start_time, end_time, priority, uri from t$segments s left join t$content c on (s.content_id = c.content_id) where start_time<=a_time and end_time>=a_time order by priority desc;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
