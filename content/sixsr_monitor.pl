@@ -17,8 +17,8 @@ require "parameters.pl";
 
 die "no CONTROL_DIR defined" if(!$CONTROL_DIR);
 
-my $DBH = DBI->connect("DBI:mysql:database=sixsr;host=192.168.1.7;".
-                       "user=$MYSQL_USER;password=$MYSQL_PASS") || 
+my $DBH = DBI->connect("DBI:Pg:dbname=sixsr",
+                       $MYSQL_USER,$MYSQL_PASS) || 
                        die $DBI::errstr;
 
 my $prev_content_id = -1;

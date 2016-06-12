@@ -77,11 +77,11 @@ WSGI_APPLICATION = 'sixsr.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'sixsr',
         'USER': 'davek',
         'PASSWORD': 'hackmeplease',
-        'HOST': '192.168.1.7',
+        'HOST': '127.0.0.1',
     }
 }
 
