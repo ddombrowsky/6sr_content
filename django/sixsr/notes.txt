@@ -1,0 +1,8 @@
+From tutorial at https://docs.djangoproject.com/en/1.7/intro/tutorial02/
+(actual version 1.6.1)
+
+
+  django-admin startproject sixsr
+  cd sixsr
+  python manage.py startapp sixsr_web
+  python manage.py syncdb  #  generate DB scripts
