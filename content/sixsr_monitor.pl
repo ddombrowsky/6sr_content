@@ -41,11 +41,17 @@ sub link_content($) {
         $n_idx = 0;
     }
 
+    printf("Got new content ->\n".Dumper($nc)."\n");
+
     print("symlink ".$nc->{uri}." -> $CONTROL_DIR/$n_idx.ogg\n");
+    my $dlink = $CONTROL_DIR."/$n_idx.ogg";
+    unlink($dlink);
     symlink($nc->{uri}, $CONTROL_DIR."/$n_idx.ogg");
+    $n_idx++;
 
     if ($nc->{preempt} == 1) {
         if ($ICES_PID) {
+            print("sending HUP to $ICES_PID\n");
             kill('HUP', $ICES_PID);
         }
     }
@@ -55,8 +61,7 @@ while(1) {
     my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) = localtime();
     my $ncontent = $DBH->selectrow_hashref("call get_content_at (\"$hour:$min\");");
 
-    printf("Got content for %02d:%02d:%02d ->\n".Dumper($ncontent)."\n",
-           $hour, $min, $sec);
+    printf("Checking at %02d:%02d:%02d\n", $hour, $min, $sec);
 
     link_content($ncontent);
 

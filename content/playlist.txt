@@ -1,0 +1,3 @@
+/home/davek/src/6sr_content/content/ctrl/0.ogg
+/home/davek/src/6sr_content/content/ctrl/1.ogg
+/home/davek/src/6sr_content/content/ctrl/2.ogg
