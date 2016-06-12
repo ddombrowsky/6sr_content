@@ -1,6 +1,4 @@
-From tutorial at https://docs.djangoproject.com/en/1.7/intro/tutorial02/
-(actual version 1.6.1)
-
+From tutorial at https://docs.djangoproject.com/en/1.9/intro/tutorial01/
 
   django-admin startproject sixsr
   cd sixsr
@@ -12,3 +10,12 @@ From tutorial at https://docs.djangoproject.com/en/1.7/intro/tutorial02/
 
   # start dev site
   python manage.py runserver 0.0.0.0:8000
+
+
+
+------
+python3 doesn't support mysql very well.  I've already run into problems.
+Database migration to postgresql might be required early on.
+I needed to find a compatible database communication engine (PyMySQL3),
+and then patch it to work according to
+http://stackoverflow.com/questions/15314468/django-1-5-pymysql-error-importerror-cannot-import-name-thing2literal
