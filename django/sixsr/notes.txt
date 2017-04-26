@@ -1,0 +1,30 @@
+From tutorial at https://docs.djangoproject.com/en/1.9/intro/tutorial01/
+
+  django-admin startproject sixsr
+  cd sixsr
+  python manage.py startapp sixsr_web
+
+  #  generate model from DB schema
+  python manage.py inspectdb
+
+  # after that, changes to model can be sent back to the DB:
+  python manage.py makemigrations sixsr_web
+  python manage.py migrate
+
+  # create initial admin
+  python manage.py createsuperuser
+
+  # start dev site
+  python manage.py runserver 0.0.0.0:8000
+
+
+
+------
+python3 doesn't support mysql very well.  I've already run into problems.
+Database migration to postgresql might be required early on.
+I needed to find a compatible database communication engine (PyMySQL3),
+and then patch it to work according to
+http://stackoverflow.com/questions/15314468/django-1-5-pymysql-error-importerror-cannot-import-name-thing2literal
+
+UPDATE: django w/ python3 doesn't support mysql AT ALL.  Moving to postgresql.
+------
